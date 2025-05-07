@@ -7,5 +7,3 @@ pip install poetry #or via conda
 poetry install
 ```
 
-* Project
-* Assignments

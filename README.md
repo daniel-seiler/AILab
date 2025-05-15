@@ -1,6 +1,6 @@
 # AI Lab
 
-* Required python version: `3.10`
+* Required python version: `<3.13,>=3.10`
 * Install dependencies with poetry:
 ```
 pip install poetry #or via conda

@@ -64,3 +64,10 @@ python -m uvicorn server:app
 ```
 
 It uses the latest model inside this path. Open http://localhost:8080 to upload your own images and get a result.
+
+In Docker:
+
+1. Build: ```docker build -t lrprojects/plant-disease-ai:latest .```
+2. Push: ```docker push lrprojects/plant-disease-ai:latest```
+
+

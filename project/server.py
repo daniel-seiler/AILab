@@ -10,7 +10,7 @@ from PIL import Image
 
 app = FastAPI()
 
-model_path = 'best_acc_model.pth'
+model_path = '/app/model/current_model.pth'
 
 width = 224
 height = 224
@@ -63,7 +63,7 @@ class CNN(nn.Module):
 
 model = CNN(num_classes=1)
 # Load model state
-model.load_state_dict(torch.load(model_path))
+model.load_state_dict(torch.load(model_path,map_location=torch.device('cpu')))
 model.eval()
 
 

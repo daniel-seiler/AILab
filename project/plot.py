@@ -1,3 +1,35 @@
+"""
+Copyright (c) 2017, Gavin Weiguang Ding
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this
+    list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+    this list of conditions and the following disclaimer in the documentation
+    and/or other materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its contributors
+    may be used to endorse or promote products derived from this software
+    without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+    ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+    LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+    CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+    POSSIBILITY OF SUCH DAMAGE.
+"""
+
+
 import os
 import numpy as np
 import matplotlib.pyplot as plt
@@ -9,12 +41,12 @@ from matplotlib.patches import Circle
 NumDots = 4
 NumConvMax = 8
 NumFcMax = 20
-White = 1.0
+White = 1.
 Light = 0.7
 Medium = 0.5
 Dark = 0.3
 Darker = 0.15
-Black = 0.0
+Black = 0.
 
 
 def add_layer(patches, colors, size=(24, 24), num=5,
@@ -120,18 +152,19 @@ if __name__ == '__main__':
 
     fig, ax = plt.subplots()
 
+
     ############################
     # conv layers
-    size_list = [(32, 32), (16, 16), (8, 8), (4, 4), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1)]
-    num_list = [3, 32, 32, 32, 32, 32, 32, 32, 32]
+    size_list = [(16,16), (8,8), (8,8), (4,4), (4,4), (2,2), (2,2), (1,1), (1,1)]
+    num_list = [3,32,32,32,32,32,32,32,32]
     x_diff_list = [0, layer_width, layer_width, layer_width, layer_width, layer_width, layer_width, layer_width, layer_width]
-    text_list = ['Inputs', 'Conv+BN+ReLU\n3x3', 'Conv+BN+ReLU\n3x3', 'Conv+BN+ReLU\n3x3', 'Conv+BN+ReLU\n5x5', 'Conv+BN+ReLU\n15x15', 'Conv+BN+ReLU\n1x1', 'Conv+BN+ReLU\n3x3', 'Conv+BN+ReLU\n1x1']
+    text_list = ['Inputs'] + ['Feature\nmaps'] * (len(size_list) - 1)
     loc_diff_list = [[3, -3]] * len(size_list)
 
     num_show_list = list(map(min, num_list, [NumConvMax] * len(num_list)))
     top_left_list = np.c_[np.cumsum(x_diff_list), np.zeros(len(x_diff_list))]
 
-    for ind in range(len(size_list)):
+    for ind in range(len(size_list)-1,-1,-1):
         if flag_omit:
             add_layer_with_omission(patches, colors, size=size_list[ind],
                                     num=num_list[ind],
@@ -147,14 +180,32 @@ if __name__ == '__main__':
             num_list[ind], size_list[ind][0], size_list[ind][1]))
 
     ############################
+    # in between layers
+    start_ratio_list = [[0.4, 0.5], [0.4, 0.8], [0.4, 0.5], [0.4, 0.8],[0.4, 0.5], [0.4, 0.8],[0.4, 0.5], [0.4, 0.8]]
+    end_ratio_list = [[0.4, 0.5], [0.4, 0.8], [0.4, 0.5], [0.4, 0.8], [0.4, 0.5], [0.4, 0.8], [0.4, 0.5], [0.4, 0.8]]
+    patch_size_list = [(3, 3), (2,2), (3, 3),(2,2), (5, 5),(2,2), (15, 15), (2,2)]
+    ind_bgn_list = range(len(patch_size_list))
+    text_list = ['Conv2d ', 'MaxPool2d', 'Conv2d', 'MaxPool2d', 'Conv2d', 'MaxPool2d', 'Conv2d', 'MaxPool2d', 'Conv2d']
+
+    for ind in range(len(patch_size_list)):
+        add_mapping(
+            patches, colors, start_ratio_list[ind], end_ratio_list[ind],
+            patch_size_list[ind], ind,
+            top_left_list, loc_diff_list, num_show_list, size_list)
+        label(top_left_list[ind], text_list[ind] + '\n{}x{} kernel'.format(
+            patch_size_list[ind][0], patch_size_list[ind][1]), xy_off=[26, -65]
+        )
+
+
+    ############################
     # fully connected layers
-    size_list = [(fc_unit_size, fc_unit_size)] * 2
-    num_list = [4, 2]
+    size_list = [(fc_unit_size, fc_unit_size)] * 3
+    num_list = [32, 4, 2]
     num_show_list = list(map(min, num_list, [NumFcMax] * len(num_list)))
-    x_diff_list = [sum(x_diff_list) + layer_width, layer_width]
+    x_diff_list = [sum(x_diff_list) + layer_width, layer_width, layer_width]
     top_left_list = np.c_[np.cumsum(x_diff_list), np.zeros(len(x_diff_list))]
     loc_diff_list = [[fc_unit_size, -fc_unit_size]] * len(top_left_list)
-    text_list = ['Hidden\nunits', 'Outputs']
+    text_list = ['Hidden\nunits'] * (len(size_list) - 1) + ['Outputs']
 
     for ind in range(len(size_list)):
         if flag_omit:
@@ -172,7 +223,7 @@ if __name__ == '__main__':
         label(top_left_list[ind], text_list[ind] + '\n{}'.format(
             num_list[ind]))
 
-    text_list = ['Flatten\n', 'Fully\nconnected']
+    text_list = ['Flatten\n', 'Fully\nconnected', 'Fully\nconnected']
 
     for ind in range(len(size_list)):
         label(top_left_list[ind], text_list[ind], xy_off=[-10, -65])
@@ -190,7 +241,7 @@ if __name__ == '__main__':
     plt.axis('equal')
     plt.axis('off')
     plt.show()
-    fig.set_size_inches(15, 2)  # Adjusted width to make the image wider
+    fig.set_size_inches(20, 5)
 
     fig_dir = './'
     fig_ext = '.png'

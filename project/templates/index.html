@@ -73,6 +73,13 @@
     <h1>Upload or Take a Picture</h1>
 
     <form id="uploadForm" enctype="multipart/form-data">
+    <label for="model_id">Choose Model:</label>
+    <select id="model_id" name="model_id" required>
+        <option value="1">SimpleCNN</option>
+        <option value="2">SmallEfficientNet</option>
+        <option value="3">EfficientNet</option>
+        <option value="4">SqueezeNet</option>
+    </select>
         <input 
             type="file" 
             id="file" 
@@ -118,6 +125,8 @@
             event.preventDefault();
             const formData = new FormData();
             formData.append('file', fileInput.files[0]);
+            pred = document.getElementById('prediction');
+            pred.textContent = 'Loading ...';
 
             try {
                 const response = await fetch('/predict', {
@@ -128,7 +137,7 @@
                 if (response.ok) {
                     const data = await response.json();
                     let label = data.prediction == 0 ? "Healthy" : "Diseased";
-                    document.getElementById('prediction').textContent = label;
+                    pred.textContent = label;
                     document.getElementById('result').style.display = 'block';
                 } else {
                     alert('Error: Unable to process the image.');

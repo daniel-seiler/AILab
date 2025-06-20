@@ -17,7 +17,7 @@ COPY project/server.py /app/server.py
 
 COPY project/templates/* /app/templates/
 
-COPY ./project/best_val_model.pth /app/model/current_model.pth
+COPY ./project/*.pth /app/model
 
 # Expose the port that FastAPI will listen on
 EXPOSE 8000

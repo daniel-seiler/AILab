@@ -55,9 +55,21 @@ The following plant types are included:
 The New Plant Diseases dataset was selected as the original dataset to be enhanced does not contain any references to the type of disease to be found in the data, as well as having a set of relativly unkown plant types. During to search for fitting dataset only plant specific dataset for one or two of the present plant types could be found. Therfore the New Plant Diesease dataset was selected instead with no overlapping plant types but a big variaty of diseases present. The image data is not of as high of a quality as the original dataset but the all leaves are taken on a darker background, and are therefore relativly similar to the original data. The goal is to create a more generalised model that predicts if a leave is healthy or diseased even if the type of plant or plant/disease relationship was not present in the dataset.
 
 
+## Results
+
+Validation accuracy on the XM dataset:
+
+![val_acc_xm](figures/val_acc_xm.png)
+
+Validation accuracy on both datasets:
+
+![val_acc_cross](figures/val_acc_all.png)
+
 ## Server for the fun of it
 
 To upload your own images or use the camera on your phone you can start the webserver with this command from the project directory:
+
+Access the demo under: https://plant-ai.lr-projects.de
 
 ```bash
 python -m uvicorn server:app
@@ -68,6 +80,7 @@ It uses the latest model inside this path. Open http://localhost:8080 to upload 
 In Docker:
 
 1. Build: ```docker build -t lrprojects/plant-disease-ai:latest .```
-2. Push: ```docker push lrprojects/plant-disease-ai:latest```
+2. (Optional) Push: ```docker push lrprojects/plant-disease-ai:latest```
+3. Run ```docker run -p 8000:8000 lrprojects/plant-disease-ai:latest```
 
 

@@ -155,7 +155,7 @@ if __name__ == '__main__':
 
     ############################
     # conv layers
-    size_list = [(16,16), (8,8), (8,8), (4,4), (4,4), (2,2), (2,2), (1,1), (1,1)]
+    size_list = [(32,32), (16,16), (16,16), (8,8), (8,8), (4,4), (4,4), (2,2), (2,2)]
     num_list = [3,32,32,32,32,32,32,32,32]
     x_diff_list = [0, layer_width, layer_width, layer_width, layer_width, layer_width, layer_width, layer_width, layer_width]
     text_list = ['Inputs'] + ['Feature\nmaps'] * (len(size_list) - 1)
@@ -176,14 +176,14 @@ if __name__ == '__main__':
             add_layer(patches, colors, size=size_list[ind],
                       num=num_show_list[ind],
                       top_left=top_left_list[ind], loc_diff=loc_diff_list[ind])
-        label(top_left_list[ind], text_list[ind] + '\n{}@{}x{}'.format(
-            num_list[ind], size_list[ind][0], size_list[ind][1]))
+        label(top_left_list[ind], text_list[ind]+ '\n{}@{}x{}'.format(
+            num_list[ind], size_list[ind][0] * 8, size_list[ind][1] * 8))
 
     ############################
     # in between layers
     start_ratio_list = [[0.4, 0.5], [0.4, 0.8], [0.4, 0.5], [0.4, 0.8],[0.4, 0.5], [0.4, 0.8],[0.4, 0.5], [0.4, 0.8]]
     end_ratio_list = [[0.4, 0.5], [0.4, 0.8], [0.4, 0.5], [0.4, 0.8], [0.4, 0.5], [0.4, 0.8], [0.4, 0.5], [0.4, 0.8]]
-    patch_size_list = [(3, 3), (2,2), (3, 3),(2,2), (5, 5),(2,2), (15, 15), (2,2)]
+    patch_size_list = [(3/8, 3/8), (2/8,2/8), (3/8, 3/8),(2/8,2/8), (5/8, 5/8),(2/8,2/8), (15/8, 15/8), (2/8,2/8)]
     ind_bgn_list = range(len(patch_size_list))
     text_list = ['Conv2d ', 'MaxPool2d', 'Conv2d', 'MaxPool2d', 'Conv2d', 'MaxPool2d', 'Conv2d', 'MaxPool2d', 'Conv2d']
 
@@ -193,7 +193,7 @@ if __name__ == '__main__':
             patch_size_list[ind], ind,
             top_left_list, loc_diff_list, num_show_list, size_list)
         label(top_left_list[ind], text_list[ind] + '\n{}x{} kernel'.format(
-            patch_size_list[ind][0], patch_size_list[ind][1]), xy_off=[26, -65]
+            int(patch_size_list[ind][0] * 8), int(patch_size_list[ind][1] * 8)), xy_off=[26, -65]
         )
 
 
@@ -241,7 +241,7 @@ if __name__ == '__main__':
     plt.axis('equal')
     plt.axis('off')
     plt.show()
-    fig.set_size_inches(20, 5)
+    fig.set_size_inches(25, 5)
 
     fig_dir = './'
     fig_ext = '.png'

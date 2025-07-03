@@ -13,42 +13,6 @@ files = [
 ]
 
 [[package]]
-name = "aggdraw"
-version = "1.3.19"
-description = "High quality drawing interface for PIL."
-optional = false
-python-versions = ">=3.9"
-groups = ["main"]
-files = [
-    {file = "aggdraw-1.3.19-cp310-cp310-macosx_14_0_arm64.whl", hash = "sha256:cfbb072ee0a6de6cb6a782724df6e8ab9648d9566fb033118dcebbe9dc06326e"},
-    {file = "aggdraw-1.3.19-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:789fc905d0bad232fe4d783ee115ed34a1c0904957dc384fc5c45a40df517975"},
-    {file = "aggdraw-1.3.19-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:30d783a7bfb2ff2ac43ce080ff18fb5df8b96ad4c0988c88324037855310e665"},
-    {file = "aggdraw-1.3.19-cp310-cp310-win_amd64.whl", hash = "sha256:4483393bc69392287d1c8159a0c475c51ce2f687b1099d686a3c5b2028e25b0f"},
-    {file = "aggdraw-1.3.19-cp310-cp310-win_arm64.whl", hash = "sha256:67f28103a619ebf7068421dfee7bd3d6cf2528887bfb5d16ecf952da10fd6f93"},
-    {file = "aggdraw-1.3.19-cp311-cp311-macosx_14_0_arm64.whl", hash = "sha256:a9b6be919955e9ace24a22ca1172786902254db22f6789a0bb8ce08bfb86603f"},
-    {file = "aggdraw-1.3.19-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:2c350f9403749e2fa33525bf9116a154ea5c7fddbb9fe045448b7700b62d882d"},
-    {file = "aggdraw-1.3.19-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:b5c47a5a4c9d1e0902b90b8b0032db55c8dc041dfc5005ff02749d8e9c0aa622"},
-    {file = "aggdraw-1.3.19-cp311-cp311-win_amd64.whl", hash = "sha256:b3bace3619f78891dbbeb1273409ea35d104880e5c22b0435808508c4c2f6a0e"},
-    {file = "aggdraw-1.3.19-cp311-cp311-win_arm64.whl", hash = "sha256:178784eb812dacfe3069fcbe4f4ef11877130803141b8f41b89535fbec0d0759"},
-    {file = "aggdraw-1.3.19-cp312-cp312-macosx_14_0_arm64.whl", hash = "sha256:e68afe82d0bbd111b2d6d7f41ac8cf13a010cd65ad095117c2e9fd8252710a73"},
-    {file = "aggdraw-1.3.19-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:4f3ff2595490b3760658a28afdca5111ed787bd1fccdab5c81d0ea57e0fe5a8c"},
-    {file = "aggdraw-1.3.19-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:56bbcc8d4f64e60ed815419837b9d2ba579169d92c4fe19e4caa3679aaedb6aa"},
-    {file = "aggdraw-1.3.19-cp312-cp312-win_amd64.whl", hash = "sha256:6a39bdf2f1043ca4148a926e35feaa1d4d592c25c8b225d8d0ad945415bab7cc"},
-    {file = "aggdraw-1.3.19-cp312-cp312-win_arm64.whl", hash = "sha256:21f951129b3014b3cf678b250ba5e4345d93243602b4062804e6111319d0eaf3"},
-    {file = "aggdraw-1.3.19-cp313-cp313-macosx_14_0_arm64.whl", hash = "sha256:f7cb8141620ec4cb3be55601115126d9a1b084ef5bdea0bb510007efa42e8cfe"},
-    {file = "aggdraw-1.3.19-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:aecacc4f6d13b8343ac07624576bab4dadd4528f0c47f54b2fae0656fc913670"},
-    {file = "aggdraw-1.3.19-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:981210dbcbb649d80763a8ae32b845ff517103718c6bb0a95bae5b9d5d1c8cd2"},
-    {file = "aggdraw-1.3.19-cp313-cp313-win_amd64.whl", hash = "sha256:41e09faf469cae11339f5d1b0680dba7ec02502efebc10086f1a142a8a39afb8"},
-    {file = "aggdraw-1.3.19-cp313-cp313-win_arm64.whl", hash = "sha256:e5552ac136225692a774d481a9baa0736c68739f64b7a7ec9f4cc5f69c8a789a"},
-    {file = "aggdraw-1.3.19-cp39-cp39-macosx_14_0_arm64.whl", hash = "sha256:e49048918017c62ba7069d781b351d4cbe8b188c76fe9104a923e57ddc95d5d0"},
-    {file = "aggdraw-1.3.19-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:13a91cb1fdf32f7e5611212987901400297098c6aa403fd59bb3221ce4608663"},
-    {file = "aggdraw-1.3.19-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:0f79e9504e5fead1881d0bc3b763b76fb17f649ef263cfc1d63a10a068e904f3"},
-    {file = "aggdraw-1.3.19-cp39-cp39-win_amd64.whl", hash = "sha256:868c10d59daf9c6f625c4a206f384c637fdafe527c56c081bb0e567fcef17b55"},
-    {file = "aggdraw-1.3.19-cp39-cp39-win_arm64.whl", hash = "sha256:f0a4fd88d737719071cbfb1eba7520ca6e64c118b71b72525944b8d7bb20327c"},
-    {file = "aggdraw-1.3.19.tar.gz", hash = "sha256:e78a23b29fb66a079832bae5604f082bfa4ff9d5d469c77506a67253d7fee7db"},
-]
-
-[[package]]
 name = "annotated-types"
 version = "0.7.0"
 description = "Reusable constraint types to use with typing.Annotated"
@@ -4148,18 +4112,6 @@ files = [
 ]
 
 [[package]]
-name = "tensorboard-plugin-customizable-plots"
-version = "1.1.3"
-description = "A plugin for TensorBoard to customize and export Scalar plots"
-optional = false
-python-versions = "*"
-groups = ["main"]
-files = [
-    {file = "tensorboard_plugin_customizable_plots-1.1.3-py3-none-any.whl", hash = "sha256:04c5d646c55894bf2361c7d2e0e28c2180506a9d29b291f62df30f42238de7f7"},
-    {file = "tensorboard_plugin_customizable_plots-1.1.3.tar.gz", hash = "sha256:c41050f643422cbb41a968d5176704b49f2cc72bfcc657114ce69738085d90e3"},
-]
-
-[[package]]
 name = "terminado"
 version = "0.18.1"
 description = "Tornado websocket backend for the Xterm.js Javascript terminal emulator library."
@@ -4669,27 +4621,6 @@ typing-extensions = {version = ">=4.0", markers = "python_version < \"3.11\""}
 standard = ["colorama (>=0.4) ; sys_platform == \"win32\"", "httptools (>=0.6.3)", "python-dotenv (>=0.13)", "pyyaml (>=5.1)", "uvloop (>=0.14.0,!=0.15.0,!=0.15.1) ; sys_platform != \"win32\" and sys_platform != \"cygwin\" and platform_python_implementation != \"PyPy\"", "watchfiles (>=0.13)", "websockets (>=10.4)"]
 
 [[package]]
-name = "visualkeras"
-version = "0.1.4"
-description = "Architecture visualization of Keras models"
-optional = false
-python-versions = ">=3.6"
-groups = ["main"]
-files = []
-develop = false
-
-[package.dependencies]
-aggdraw = ">=1.3.11"
-numpy = ">=1.18.1"
-pillow = ">=6.2.0"
-
-[package.source]
-type = "git"
-url = "https://github.com/paulgavrikov/visualkeras"
-reference = "HEAD"
-resolved_reference = "467872c770562592a96392be6232c99fe3c48605"
-
-[[package]]
 name = "wasabi"
 version = "1.1.3"
 description = "A lightweight console printing and formatting toolkit"
@@ -4890,4 +4821,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = "<3.13,>=3.10"
-content-hash = "c41869344504f4b106f5fc1639cf84246e774023bbbb1b17f6e6b7250e6c5072"
+content-hash = "887e8254ef5ec8658782883ae77995f62ce74a72984f225c4589a6a77773e6f3"

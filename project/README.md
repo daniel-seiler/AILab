@@ -1,17 +1,33 @@
 # Project
 
-A classificator to detect healthy vs diseased leaves
+Plant diseases have a huge impact on the agriculture industry by causing substantial yield losses, threatening farmer livelihoods and may therefore pose a threat to food security. Other usages include hobby gardeners or home owners with plants to check for diseased plants. A variety of techniques have been used in recent years to tackle this problem, including more traditional computer vision techniques like edge-detection or clustering as well as machine learning using CNNs or SVMs. This project aims to explore different machine learning techniques, architectures and their influence on a model performance including pre-processing, cross-dataset learning, hyper-parameter tuning, pre-trained model fine-tuning using different sized models for a **binary classification of diseased plant leaves**.
 
-<cite>xiangm. Computer Vision - XM. https://kaggle.com/competitions/computer-vision-xm, 2024. Kaggle.</cite>
+
+* The training implementation can be found in the [project.ipynb](./project.ipynb) file.
+* Our trained models end with *.pth*
+* You can try a demo [here](https://plant-ai.lr-projects.de/). Read more in the [server](#server-for-the-fun-of-it) section.
+
 
 ## Gettings started
+
+### Install dependencies:
+
+* Required python version: `<3.13,>=3.10`
+* Install dependencies with poetry from the root dir of this repo:
+```
+pip install poetry
+poetry install
+```
+
+
+### Add Kaggle API-Key
 
 1. Add Kaggle API-Key
     1. Go to your [Kaggle Account](https://www.kaggle.com/settings)
     2. Under API click *Create New Token*
     3. Add the downloaded file under `~/.kaggle/kaggle.json` on Linux, OSX, and other UNIX-based operating systems, and at `C:\Users\<Windows-username>\.kaggle\kaggle.json` on Windows
 
-2. Run notebook
+2. Run the [project.ipynb](./project.ipynb) notebook
 
 ## Datasets:
 
@@ -22,8 +38,9 @@ The original dataset and the cross dataset learning dataset in comparision:
 
 |Dataset                  | num images | num healthy leaves (0) | num diseased leaves (1) | num leave types | image size | num disease types|
 |-------------------------|------------|------------------------|-------------------------|-----------------|------------|------------------|
-| **Computer Vision - XM**| 4235       | 2129                   | 2107                    | 10              | 6000x4000  | -                |
-| **New Plant Diseases**  | 87667      | 27866                  | 59801                   | 14              | 256x256    | ~ 24             |
+| **Computer Vision (XM)**| 4235       | 2129                   | 2107                    | 10              | 6000x4000  | -                |
+| **New Plant Diseases (ND)**  | 87667      | 27866                  | 59801                   | 14              | 256x256    | ~ 24             |
+| **KI-Lab**  | 20      | 4                  | 16                   | 9              | -    | -             |
 
 Both dataset focus on disease detection for use in the agriculture industry as stated by the original dataset:
 
@@ -57,25 +74,26 @@ The New Plant Diseases dataset was selected as the original dataset to be enhanc
 
 ## Results
 
-Validation accuracy on the XM dataset:
 
-![val_acc_xm](figures/val_acc_xm.png)
+![val_acc_xm](figures/performance.png)
 
-Validation accuracy on both datasets:
-
-![val_acc_cross](figures/val_acc_all.png)
+These are the final results when training EfficientNet 0B, SqueezeNet 1.1, SEN and SimpleCNN on both datasets and validating them on a test split of each dataset that was never seen during training.
 
 ## Server for the fun of it
 
-To upload your own images or use the camera on your phone you can start the webserver with this command from the project directory:
+To try out if the models work under real circumstances, a small python server can be found under [server.py](./server.py) that serves a simple HTML page and runs the models in the backend. Simply take an image when opening the website on your phone or uplaod an image when opening it on a desktop.
 
 Access the demo under: https://plant-ai.lr-projects.de
+
+### How to use it locally
+
+To upload your own images or use the camera on your phone you can start the webserver with this command from the project directory:
 
 ```bash
 python -m uvicorn server:app
 ```
 
-It uses the latest model inside this path. Open http://localhost:8080 to upload your own images and get a result.
+ Open http://localhost:8080 to upload your own images and get a result.
 
 In Docker:
 

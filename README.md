@@ -1,6 +1,16 @@
 # AI Lab
 
-This repository contains the assignment and the project from the AI-Lab lecture in university. The assignments 1 - 6 can found in the [assignment](./assignments/) directory. The [project notebook](./project/project.ipynb) in the  [project](./project/) directory.
+This repository contains the assignment and the project from the AI-Lab lecture. 
+
+## Assignments
+
+The assignments 1 - 6 can found in the [assignment](./assignments/) directory. 
+
+## Project
+
+The [project notebook](./project/project.ipynb) in the  [project](./project/) directory.
+
+## Install dependencies
 
 To install the dependencies in all assignments and project run:
 

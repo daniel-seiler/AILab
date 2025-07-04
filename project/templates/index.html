@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        input[type="file"] {
+            padding: 0.5rem;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        #preview {
+            margin-top: 1rem;
+            max-width: 300px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        #result {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        #prediction {
+            color: #2c3e50;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>Upload or Take a Picture</h1>
+
+    <form id="uploadForm" enctype="multipart/form-data">
+    <label for="model_id">Choose Model:</label>
+    <select id="model_id" name="model_id" required>
+        <option value="1">SimpleCNN</option>
+        <option value="2">SmallEfficientNet</option>
+        <option value="3">EfficientNet</option>
+        <option value="4">SqueezeNet</option>
+    </select>
+        <input 
+            type="file" 
+            id="file" 
+            name="file" 
+            accept="image/*" 
+            capture="environment" 
+            required>
+        <img id="preview" src="#" alt="Image preview" />
+        <button type="submit">Upload</button>
+    </form>
+
+    <div id="result">
+        <h2>Prediction Result:</h2>
+        <p>Label: <span id="prediction"></span></p>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('file');
+        const preview = document.getElementById('preview');
+
+        fileInput.addEventListener('change', function () {
+            document.getElementById('result').style.display = 'none';
+            document.getElementById('prediction').textContent = '';
+        });
+
+        // Show preview when image is selected
+        fileInput.addEventListener('change', function () {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.setAttribute('src', e.target.result);
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                preview.style.display = 'none';
+            }
+        });
+
+        // Handle upload and show prediction
+        document.getElementById('uploadForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+            pred = document.getElementById('prediction');
+            pred.textContent = 'Loading ...';
+
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    let label = data.prediction == 0 ? "Healthy" : "Diseased";
+                    pred.textContent = label;
+                    document.getElementById('result').style.display = 'block';
+                } else {
+                    alert('Error: Unable to process the image.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while uploading the image.');
+            }
+        });
+    </script>
+</body>
+</html>
